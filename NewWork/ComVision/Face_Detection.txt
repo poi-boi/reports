@@ -1,0 +1,28 @@
+!pip install open-cv python
+-----------------------------------------
+import cv2	
+
+
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+
+image_path = 'D:/MSCIT_books/sem2/c1.jpeg'  # path to your image
+image = cv2.imread(image_path)	
+
+
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+
+faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30,30))
+
+
+for (x,y,w,h) in faces:
+    cv2.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)
+
+
+output_path = 'D:/MSCIT_books/sem2/faces_detected_1.jpg'   
+
+
+cv2.imwrite(output_path, image)
+
+print(f"Faces Detected: {len(faces)}. Output saved to {output_path}")
