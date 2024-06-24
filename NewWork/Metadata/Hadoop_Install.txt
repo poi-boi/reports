@@ -1,0 +1,70 @@
+1.	Download Java from oracle website. Search for java SE development kit 8 download (8u214)
+   
+2.	To install Java. Double click on the exe file downloaded. A download wizard appears click on next. 
+   
+3.	The installation is started. Change the destination folder to desired location and click on install.
+      
+4.	Create “Java” folder under C: drive and choose that folder as the destination folder and click on install.
+	      
+5.	Once installation is completed close the wizard and go to the jdk folder installed in the program files. Copy the “jdk1.8.0_241” folder from program files and paste it to the destination folder created earlier (C:/Java).
+     
+6.	Set the Environment variable and system path to this folder for java. 
+   
+7.	Run below commands in cmd to test if the java is installed successfully.
+> javac                                                              > java -version
+8.	Download Hadoop 3.1.3 tar file from web and unzip the tar file once download is completed. Create a folder “hadoop” in C: drive and past all the file content extracted from the tar file.
+       
+9.	Once the directory is setup, configure below four files.
+a.	Core-site.xml
+<configuration>
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://localhost:9000</value>
+	</property>
+</configuration>
+b.	Hdfs-site.xml
+<configuration>
+	<property>
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+	<property>
+		<name>dfs.namenode.name.dir</name>
+		<value>file:///C:/hadoop/data/namenode</value>
+	</property>
+	<property>
+		<name>dfs.datanode.data.dir</name>
+		<value>file:///C:/hadoop/data/datanode</value>
+	</property>
+</configuration>
+c.	Mapred-site.xml
+<configuration>
+	<property>
+		<name>mapred.framework.name</name>
+		<value>yarn</value>
+	</property>
+</configuration>
+d.	Yarn-site.xml
+<configuration> 
+      <!-- Site specific YARN configuration properties -->
+	<property>
+		<name>yarn.nodemanager.aux-services</name>
+		<value>mapreduce_shuffle</value>
+	</property>
+	<property>
+		<name>yarn.nodemanager.auxservices.mapreduce.shuffle.class</name>
+		<value>org.apache.hadoop.mapred.ShuffleHandler</value>
+	</property>
+</configuration>
+
+10.	Create two directories “namenode” & “datanode” under data directory. And add java jdk directory path to “hadoop-env.cmd” file.
+
+11.	Set the environment variable and system path for hadoop.
+
+12.	Download hadoop configuration file and extract it in the hadoop folder.
+
+13.	Once all the directory and system variables are set up. Test the hadoop installation. Open cmd and type “hdfs namenode -format” 
+
+14.	Run “start-all.cmd” command to start all HDFS services.
+
+15.	Run “start-yarn.cmd” command to start all YARN services

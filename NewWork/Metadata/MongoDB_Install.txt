@@ -1,0 +1,39 @@
+1.	Download the 5.0.26 version of MongoDB double click on the executable file.
+    
+2.	Accept all the license agreement and choose complete setup type from the setup wizard.
+      
+3.	Service configuration dialog box appears click on next and its ready to install.
+    
+4.	Click on install button to start installation.
+    
+5.	Once the installation is completed click on finish and go to the bin folder of the installed file.
+  
+6.	Open cmd from the bin folder to verify if the installation is successful. Rum “mongod” command on cmd.
+        
+7.	Create “C:/data/db” directory and rerun the “mongod” command
+    
+8.	The Mongo Demon have started. Again, go to the bin folder of the installed directory and run “mongo” command.
+ 
+9.	Once the mongo shell is started verify the different components using below commands. 
+Commands: >show dbs  -- To show dbs present in system.
+>use my_database  -- To create new db and use it.
+>db.books.insert({“name” : “Experiments with Truth”})  -- To insert json values in db.
+>show collections  -- To see entered collections.
+>db.books.find() – To see all collections in db.
+    
+10.	Set system path for mongo db. And retry “mongod” and “mongo” command.
+    
+11.	This should start the mongo demon and shell automatically.
+ 
+12.	To connect mongodb with python install below package. 
+>conda install -c anaconda pymongo
+    
+13.	Once the package is installed verify the connection
+14.	Run below code on python
+import pymongo
+mongo_uri = "mongodb://localhost:27017/"
+client = pymongo.MongoClient(mongo_uri)
+print(client.list_database_names())
+db = client.my_database
+print(db.list_collection_names())
+table=db.books
