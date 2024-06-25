@@ -1,3 +1,5 @@
+#https://www.rajeshmaurya.in/el/data/colorization_files.zip (download from here)
+
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
