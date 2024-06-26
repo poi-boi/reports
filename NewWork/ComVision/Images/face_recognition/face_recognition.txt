@@ -1,0 +1,21 @@
+first  import face_recognition
+if its gives error as "ModuleNotFoundError: No module named 'face_recognition'"
+
+check where python
+%%cmd
+where python 
+
+check python version
+%%cmd
+python --version
+%%cmd
+python --version (3.11.5)
+
+%%cmd
+pip install "D:\MSCIT_books\sem2\CV_pracs\dlib-19.24.1-cp311-cp311-win_amd64.whl"
+
+%%cmd
+pip install face-recognition
+
+
+(https://github.com/z-mahmud22/Dlib_Windows_Python3.x)
