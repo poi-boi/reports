@@ -1,3 +1,8 @@
+#A) Perform Text Detection and Recognition
+#(install tesseract ocr --> (https://github.com/UB-Mannheim/tesseract/wiki))
+#after that type pip install pytesseract in jupyter
+
+#pip install pytesseract
 import pytesseract
 import cv2
 from pytesseract import Output
