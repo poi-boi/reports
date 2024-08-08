@@ -1,0 +1,126 @@
+Router R1 (hostname SanJose)
+conf t
+hostname SanJose
+interface Loopback0
+ip address 10.1.1.1 255.255.255.0
+exit
+interface S1/0
+ip address 192.168.1.5 255.255.255.252
+clock rate 128000
+no shutdown 
+
+Router R2 (hostname ISP)
+conf t
+hostname ISP
+interface Loopback0
+ip address 10.2.2.1 255.255.255.0
+exit
+interface S1/0
+ip address 192.168.1.6 255.255.255.252
+no shutdown 
+exit
+interface S1/1
+ip address 172.24.1.17 255.255.255.252
+clock rate 128000
+no shutdown 
+
+Router R3 (hostname CustRtr)
+conf t
+hostname CustRtr
+interface Loopback0
+ip address 10.3.3.1 255.255.255.0
+exit
+interface S1/1
+ip address 172.24.1.18 255.255.255.252
+no shutdown 
+
+
+Step 3:- Configure BGP
+a) Configure BGP for normal operation. Enter the appropriate BGP commands on each router so that they identify their BGP neighbors and advertise their loopback networks.
+
+Router R1 (hostname SanJose)
+router bgp 100
+neighbor 192.168.1.6 remote-as 300
+network 10.1.1.0 mask 255.255.255.0
+
+Router R2 (hostname ISP)
+router bgp 300
+neighbor 192.168.1.5 remote-as 100
+neighbor 172.24.1.18 remote-as 65000
+network 10.2.2.0 mask 255.255.255.0
+
+
+Router R3 (hostname CustRtr)
+router bgp 65000
+neighbor 172.24.1.17 remote-as 300
+network 10.3.3.0 mask 255.255.255.0
+
+
+Router R2 (hostname ISP)
+show ip bgp neighbors
+
+
+Router R1 (hostname SanJose)
+show ip route
+
+
+b) Ping the 10.3.3.1 address from the SanJose.
+ping 10.3.3.1
+
+(this will fail)
+
+c) Ping again, this time as an extended ping, sourcing from the Loopback0 interface address.
+
+ping 10.3.3.1 source 10.1.1.1
+
+(this will work)
+
+Router R2 (hostname ISP)
+
+router bgp 300
+neighbor 192.168.1.5 remove-private-as
+
+clear ip bgp *
+
+Router R1 (hostname SanJose)
+
+show ip route 
+
+
+Router R1 (hostname SanJose)
+ping 10.3.3.1 source 10.1.1.1
+
+Router R1 (hostname SanJose)
+show ip bgp
+
+Router R2 (hostname ISP)
+ip as-path access-list 1 deny ^100$
+ip as-path access-list 1 permit .*
+
+Router R2 (hostname ISP)
+router bgp 300
+neighbor 172.24.1.18 filter-list 1 out
+
+Router R2 (hostname ISP)
+clear ip bgp *
+show ip route 
+
+Router R3 (hostname CustRtr)
+show ip route
+
+Router R2 (hostname ISP) 
+show ip bgp regexp ^100$
+
+Router R2 (hostname ISP)
+tclsh
+foreach address { 
+10.1.1.1 
+10.2.2.1 
+10.3.3.1 
+192.168.1.5 
+192.168.1.6 
+172.24.1.17 
+172.24.1.18 
+} { Ping $address }
+
+
