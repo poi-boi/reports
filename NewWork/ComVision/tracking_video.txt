@@ -10,7 +10,7 @@ with open("coco.names", "r") as f:
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i-1] for i in net.getUnconnectedOutLayers()]
 
-cap = cv2.VideoCapture('video1.mp4')
+cap = cv2.VideoCapture('v1.mp4')
 try:
     while cap.isOpened():
         ret, frame = cap.read()
