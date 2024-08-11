@@ -30,8 +30,8 @@ def reconstruct_3d_points(K, kp1, kp2, matches, E):
     return points_3d
 
 
-img1 = cv2.imread('3d1.jpg', cv2.IMREAD_GRAYSCALE)
-img2 = cv2.imread('3d2.jpg', cv2.IMREAD_GRAYSCALE)
+img1 = cv2.imread('3d.jpg', cv2.IMREAD_GRAYSCALE)
+img2 = cv2.imread('3d1.jpg', cv2.IMREAD_GRAYSCALE)
 
 
 fx = 1000  
