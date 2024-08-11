@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img1_color = cv2.imread('right.jpg')  
-img2_color = cv2.imread('left.jpg')  
+img1_color = cv2.imread('left_img.jpg')  
+img2_color = cv2.imread('right_img.jpg')  
 
 img1 = cv2.cvtColor(img1_color, cv2.COLOR_BGR2GRAY)
 img2 = cv2.cvtColor(img2_color, cv2.COLOR_BGR2GRAY)
